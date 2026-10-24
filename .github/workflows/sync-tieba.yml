@@ -1,0 +1,38 @@
+name: Sync Tieba Emotions
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+
+      - name: Download source repository
+        run: |
+          rm -rf /tmp/tieba-src
+          git clone --depth 1 https://github.com/microlong666/Tieba_mobile_emotions.git /tmp/tieba-src
+
+      - name: Copy PNG emotions into Meme Manager layout
+        run: |
+          rm -rf memes/tieba
+          mkdir -p memes/tieba
+          find /tmp/tieba-src -maxdepth 1 -type f -name 'image_emoticon*.png' -exec cp {} memes/tieba/ \;
+          echo "Copied $(find memes/tieba -type f -name '*.png' | wc -l) PNG files"
+
+      - name: Commit synced assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add memes/tieba
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Sync Tieba default emotions"
+            git push
+          fi
