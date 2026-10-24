@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "id": "tieba-default-emotions",
+  "name": "百度贴吧默认表情包",
+  "version": "1.0.0",
+  "description": "百度贴吧移动端默认表情资源，整理为 AstrBot Meme Manager 兼容格式。",
+  "author": "hb7398589-code (packaging); source: microlong666/Tieba_mobile_emotions",
+  "homepage": "https://github.com/hb7398589-code/bqb",
+  "tags": ["tieba", "baidu", "classic", "reaction"],
+  "source": {
+    "type": "github",
+    "repo": "hb7398589-code/bqb",
+    "ref": "main",
+    "subpath": "."
+  },
+  "categories": {
+    "tieba": {
+      "description": "百度贴吧移动端默认表情，用于日常聊天中的开心、疑问、无语、吐槽、生气、惊讶等常见情绪表达。"
+    }
+  }
+}
