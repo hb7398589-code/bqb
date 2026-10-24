@@ -1,6 +1,10 @@
 name: Sync Tieba Emotions
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/sync-tieba.yml'
   workflow_dispatch:
 
 permissions:
